@@ -9,7 +9,7 @@ namespace Freelancer.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<CategoryJobAdvertisement> CategoryJobAdvertisement { get; set; }
+        public List<CategoryJobAdvertisement> CategoryJobAdvertisements { get; set; }
 
     }
 }

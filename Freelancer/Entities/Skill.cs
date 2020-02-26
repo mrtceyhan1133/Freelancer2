@@ -9,8 +9,8 @@ namespace Freelancer.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public virtual List<SkillJobAdvertisement> SkillJobAdvertisement { get; set; }
-        public virtual List<UserSkill> UserSkill { get; set; }
+        public virtual List<SkillJobAdvertisement> SkillJobAdvertisements { get; set; }
+        public virtual List<UserSkill> UserSkills { get; set; }
 
     }
 }
