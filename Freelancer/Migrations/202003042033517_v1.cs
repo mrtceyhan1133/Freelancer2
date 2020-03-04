@@ -3,7 +3,7 @@ namespace Freelancer.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class V1 : DbMigration
+    public partial class v1 : DbMigration
     {
         public override void Up()
         {
@@ -37,11 +37,23 @@ namespace Freelancer.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         AdvertisementName = c.String(),
                         Explanation = c.String(),
-                        UserId = c.Int(nullable: false),
+                        EmployerId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
+                .ForeignKey("dbo.Employers", t => t.EmployerId, cascadeDelete: true)
+                .Index(t => t.EmployerId);
+            
+            CreateTable(
+                "dbo.Employers",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Surname = c.String(),
+                        PhoneNumber = c.String(),
+                        UserName = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.SkillJobAdvertisements",
@@ -67,21 +79,21 @@ namespace Freelancer.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.UserSkills",
+                "dbo.WorkerSkills",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        UserId = c.Int(nullable: false),
+                        WorkerId = c.Int(nullable: false),
                         SkillId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Skills", t => t.SkillId, cascadeDelete: true)
-                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId)
+                .ForeignKey("dbo.Workers", t => t.WorkerId, cascadeDelete: true)
+                .Index(t => t.WorkerId)
                 .Index(t => t.SkillId);
             
             CreateTable(
-                "dbo.Users",
+                "dbo.Workers",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -97,24 +109,25 @@ namespace Freelancer.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.UserSkills", "UserId", "dbo.Users");
-            DropForeignKey("dbo.JobAdvertisements", "UserId", "dbo.Users");
-            DropForeignKey("dbo.UserSkills", "SkillId", "dbo.Skills");
+            DropForeignKey("dbo.WorkerSkills", "WorkerId", "dbo.Workers");
+            DropForeignKey("dbo.WorkerSkills", "SkillId", "dbo.Skills");
             DropForeignKey("dbo.SkillJobAdvertisements", "SkillId", "dbo.Skills");
             DropForeignKey("dbo.SkillJobAdvertisements", "JobAdvertisementId", "dbo.JobAdvertisements");
+            DropForeignKey("dbo.JobAdvertisements", "EmployerId", "dbo.Employers");
             DropForeignKey("dbo.CategoryJobAdvertisements", "JobAdvertisementId", "dbo.JobAdvertisements");
             DropForeignKey("dbo.CategoryJobAdvertisements", "CategoryId", "dbo.Categories");
-            DropIndex("dbo.UserSkills", new[] { "SkillId" });
-            DropIndex("dbo.UserSkills", new[] { "UserId" });
+            DropIndex("dbo.WorkerSkills", new[] { "SkillId" });
+            DropIndex("dbo.WorkerSkills", new[] { "WorkerId" });
             DropIndex("dbo.SkillJobAdvertisements", new[] { "JobAdvertisementId" });
             DropIndex("dbo.SkillJobAdvertisements", new[] { "SkillId" });
-            DropIndex("dbo.JobAdvertisements", new[] { "UserId" });
+            DropIndex("dbo.JobAdvertisements", new[] { "EmployerId" });
             DropIndex("dbo.CategoryJobAdvertisements", new[] { "JobAdvertisementId" });
             DropIndex("dbo.CategoryJobAdvertisements", new[] { "CategoryId" });
-            DropTable("dbo.Users");
-            DropTable("dbo.UserSkills");
+            DropTable("dbo.Workers");
+            DropTable("dbo.WorkerSkills");
             DropTable("dbo.Skills");
             DropTable("dbo.SkillJobAdvertisements");
+            DropTable("dbo.Employers");
             DropTable("dbo.JobAdvertisements");
             DropTable("dbo.CategoryJobAdvertisements");
             DropTable("dbo.Categories");

@@ -11,107 +11,107 @@ using Freelancer.Entities;
 
 namespace Freelancer.Controllers
 {
-    public class HireController : Controller
+    public class WorkersController : Controller
     {
         private FreelanceDbContext db = new FreelanceDbContext();
 
-        // GET: Hire
+        // GET: Workers
         public ActionResult Index()
         {
-            return View(db.JobAdvertisements.ToList());
+            return View(db.Workers.ToList());
         }
 
-        // GET: Hire/Details/5
+        // GET: Workers/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            JobAdvertisement jobAdvertisement = db.JobAdvertisements.Find(id);
-            if (jobAdvertisement == null)
+            Worker worker = db.Workers.Find(id);
+            if (worker == null)
             {
                 return HttpNotFound();
             }
-            return View(jobAdvertisement);
+            return View(worker);
         }
 
-        // GET: Hire/Create
+        // GET: Workers/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Hire/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Workers/Create
+        // Aşırı gönderim saldırılarından korunmak için, lütfen bağlamak istediğiniz belirli özellikleri etkinleştirin, 
+        // daha fazla bilgi için https://go.microsoft.com/fwlink/?LinkId=317598 sayfasına bakın.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,AdvertisementName,Explanation,UserId")] JobAdvertisement jobAdvertisement)
+        public ActionResult Create([Bind(Include = "Id,Name,Surname,PhoneNumber,UserName,Rating")] Worker worker)
         {
             if (ModelState.IsValid)
             {
-                db.JobAdvertisements.Add(jobAdvertisement);
+                db.Workers.Add(worker);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(jobAdvertisement);
+            return View(worker);
         }
 
-        // GET: Hire/Edit/5
+        // GET: Workers/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            JobAdvertisement jobAdvertisement = db.JobAdvertisements.Find(id);
-            if (jobAdvertisement == null)
+            Worker worker = db.Workers.Find(id);
+            if (worker == null)
             {
                 return HttpNotFound();
             }
-            return View(jobAdvertisement);
+            return View(worker);
         }
 
-        // POST: Hire/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Workers/Edit/5
+        // Aşırı gönderim saldırılarından korunmak için, lütfen bağlamak istediğiniz belirli özellikleri etkinleştirin, 
+        // daha fazla bilgi için https://go.microsoft.com/fwlink/?LinkId=317598 sayfasına bakın.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,AdvertisementName,Explanation,UserId")] JobAdvertisement jobAdvertisement)
+        public ActionResult Edit([Bind(Include = "Id,Name,Surname,PhoneNumber,UserName,Rating")] Worker worker)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(jobAdvertisement).State = EntityState.Modified;
+                db.Entry(worker).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(jobAdvertisement);
+            return View(worker);
         }
 
-        // GET: Hire/Delete/5
+        // GET: Workers/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            JobAdvertisement jobAdvertisement = db.JobAdvertisements.Find(id);
-            if (jobAdvertisement == null)
+            Worker worker = db.Workers.Find(id);
+            if (worker == null)
             {
                 return HttpNotFound();
             }
-            return View(jobAdvertisement);
+            return View(worker);
         }
 
-        // POST: Hire/Delete/5
+        // POST: Workers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            JobAdvertisement jobAdvertisement = db.JobAdvertisements.Find(id);
-            db.JobAdvertisements.Remove(jobAdvertisement);
+            Worker worker = db.Workers.Find(id);
+            db.Workers.Remove(worker);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

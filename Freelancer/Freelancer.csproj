@@ -173,25 +173,27 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Context\FreelanceDbContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HireController.cs" />
+    <Compile Include="Controllers\EmployersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\WorkerController.cs" />
+    <Compile Include="Controllers\WorkersController.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\CategoryJobAdvertisement.cs" />
+    <Compile Include="Entities\Employer.cs" />
     <Compile Include="Entities\JobAdvertisement.cs" />
     <Compile Include="Entities\Skill.cs" />
     <Compile Include="Entities\SkillJobAdvertisement.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="Entities\UserSkill.cs" />
+    <Compile Include="Entities\Worker.cs" />
+    <Compile Include="Entities\WorkerSkill.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202002261447279_V1.cs" />
-    <Compile Include="Migrations\202002261447279_V1.Designer.cs">
-      <DependentUpon>202002261447279_V1.cs</DependentUpon>
+    <Compile Include="Migrations\202003042033517_v1.cs" />
+    <Compile Include="Migrations\202003042033517_v1.Designer.cs">
+      <DependentUpon>202003042033517_v1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -256,16 +258,16 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Worker\Create.cshtml" />
-    <Content Include="Views\Worker\Delete.cshtml" />
-    <Content Include="Views\Worker\Details.cshtml" />
-    <Content Include="Views\Worker\Edit.cshtml" />
-    <Content Include="Views\Worker\Index.cshtml" />
-    <Content Include="Views\Hire\Create.cshtml" />
-    <Content Include="Views\Hire\Delete.cshtml" />
-    <Content Include="Views\Hire\Details.cshtml" />
-    <Content Include="Views\Hire\Edit.cshtml" />
-    <Content Include="Views\Hire\Index.cshtml" />
+    <Content Include="Views\Employers\Create.cshtml" />
+    <Content Include="Views\Employers\Delete.cshtml" />
+    <Content Include="Views\Employers\Details.cshtml" />
+    <Content Include="Views\Employers\Edit.cshtml" />
+    <Content Include="Views\Employers\Index.cshtml" />
+    <Content Include="Views\Workers\Create.cshtml" />
+    <Content Include="Views\Workers\Delete.cshtml" />
+    <Content Include="Views\Workers\Details.cshtml" />
+    <Content Include="Views\Workers\Edit.cshtml" />
+    <Content Include="Views\Workers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -284,8 +286,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202002261447279_V1.resx">
-      <DependentUpon>202002261447279_V1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003042033517_v1.resx">
+      <DependentUpon>202003042033517_v1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

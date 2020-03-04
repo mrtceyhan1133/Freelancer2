@@ -1,37 +1,141 @@
-namespace Freelancer.Migrations
-{
-    using Freelancer.Controllers;
-    using Freelancer.Entities;
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using Freelancer.Context;
+using Freelancer.Entities;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Freelancer.Context.FreelanceDbContext>
+namespace Freelancer.Controllers
+{
+    public class EmployersController : Controller
     {
-        public Configuration()
+        private FreelanceDbContext db = new FreelanceDbContext();
+
+        // GET: Employers
+        public ActionResult Index()
         {
-            AutomaticMigrationsEnabled = false;
+            return View(db.Employers.ToList());
         }
 
-        protected override void Seed(Freelancer.Context.FreelanceDbContext context)
+        // GET: Employers/Details/5
+        public ActionResult Details(int? id)
         {
-            //  This method will be called after migrating to the latest version.
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Employer employer = db.Employers.Find(id);
+            if (employer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(employer);
+        }
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
-            //Class1 lass1 = new Class1();
-            //lass1.X();
+        // GET: Employers/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Employers/Create
+        // Aşırı gönderim saldırılarından korunmak için, lütfen bağlamak istediğiniz belirli özellikleri etkinleştirin, 
+        // daha fazla bilgi için https://go.microsoft.com/fwlink/?LinkId=317598 sayfasına bakın.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Name,Surname,PhoneNumber,UserName")] Employer employer)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Employers.Add(employer);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(employer);
+        }
+
+        // GET: Employers/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Employer employer = db.Employers.Find(id);
+            if (employer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(employer);
+        }
+
+        // POST: Employers/Edit/5
+        // Aşırı gönderim saldırılarından korunmak için, lütfen bağlamak istediğiniz belirli özellikleri etkinleştirin, 
+        // daha fazla bilgi için https://go.microsoft.com/fwlink/?LinkId=317598 sayfasına bakın.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Name,Surname,PhoneNumber,UserName")] Employer employer)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(employer).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(employer);
+        }
+
+        // GET: Employers/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Employer employer = db.Employers.Find(id);
+            if (employer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(employer);
+        }
+
+        // POST: Employers/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Employer employer = db.Employers.Find(id);
+            db.Employers.Remove(employer);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+        public void x()
+        {
             List<Worker> workerList = new List<Worker>()
             {
                 new Worker()
                 {
                     Id=1,
-                    Name="Ya�mur",
+                    Name="Yağmur",
                     Surname="Atici",
                     PhoneNumber="12345",
-                    UserName="Ya�mu�",
+                    UserName="Yağmuş",
                     Rating = 5,
                     WorkerSkills=new List<WorkerSkill>()
                 },
@@ -41,7 +145,7 @@ namespace Freelancer.Migrations
                     Name="Murat",
                     Surname="Ceyhan",
                     PhoneNumber="123456",
-                    UserName="Mur�ik",
+                    UserName="Murçik",
                     Rating = 5,
                     WorkerSkills=new List<WorkerSkill>()
                 },
@@ -49,9 +153,9 @@ namespace Freelancer.Migrations
                 {
                     Id=3,
                     Name="Alev",
-                    Surname="Y�lmaz",
+                    Surname="Yılmaz",
                     PhoneNumber="112525456",
-                    UserName="Ate�",
+                    UserName="Ateş",
                     Rating = 3.8,
                     WorkerSkills=new List<WorkerSkill>(),
                 },
@@ -61,9 +165,9 @@ namespace Freelancer.Migrations
                 new Employer()
                 {
                     Id=1,
-                    Name="�a��l",
+                    Name="Çağıl",
                     PhoneNumber="1234123",
-                    Surname="Alsa�",
+                    Surname="Alsaç",
                     UserName="Angeleo",
                     JobAdvertisements = new List<JobAdvertisement>()
                 },
@@ -81,7 +185,7 @@ namespace Freelancer.Migrations
                     Id=3,
                     Name="Ceku",
                     PhoneNumber="443232",
-                    Surname="Bal�m",
+                    Surname="Balım",
                     UserName="Cb123",
                     JobAdvertisements = new List<JobAdvertisement>()
                 }
@@ -383,7 +487,7 @@ namespace Freelancer.Migrations
             // context update:
             foreach (Worker worker in workerList)
             {
-                context.Workers.AddOrUpdate(m => m.Name,
+                db.Workers.AddOrUpdate(m => m.Name,
                     new Worker
                     {
                         Name = worker.Name,
@@ -397,7 +501,7 @@ namespace Freelancer.Migrations
             }
             foreach (Employer employer in employerList)
             {
-                context.Employers.AddOrUpdate(e => e.Name,
+                db.Employers.AddOrUpdate(e => e.Name,
                    new Employer()
                    {
                        Id = employer.Id,
@@ -411,7 +515,7 @@ namespace Freelancer.Migrations
             }
             foreach (Skill skill in skillList)
             {
-                context.Skills.AddOrUpdate(m => m.Name,
+                db.Skills.AddOrUpdate(m => m.Name,
                     new Skill
                     {
                         Name = skill.Name,
@@ -422,7 +526,7 @@ namespace Freelancer.Migrations
             }
             foreach (Category category in categoryList)
             {
-                context.Categories.AddOrUpdate(m => m.Name,
+                db.Categories.AddOrUpdate(m => m.Name,
                     new Category
                     {
                         Name = category.Name,
@@ -430,26 +534,21 @@ namespace Freelancer.Migrations
                     }
                 );
             }
-            //foreach (JobAdvertisement jobAdvertisement in jobAdvertisementList)
-            //{
-            //    context.JobAdvertisements.AddOrUpdate(m => m.AdvertisementName,
-            //        new JobAdvertisement
-            //        {
+            foreach (JobAdvertisement jobAdvertisement in jobAdvertisementList)
+            {
+                db.JobAdvertisements.AddOrUpdate(m => m.AdvertisementName,
+                    new JobAdvertisement
+                    {
 
-            //            AdvertisementName = jobAdvertisement.AdvertisementName,
-            //            CategoryJobAdvertisements = jobAdvertisement.CategoryJobAdvertisements,
-            //            SkillJobAdvertisements = jobAdvertisement.SkillJobAdvertisements,
-            //            Explanation = jobAdvertisement.Explanation,
-            //            EmployerId = jobAdvertisement.EmployerId,
-            //            Employer = jobAdvertisement.Employer
-            //        }
-            //    );
-            //}
-
-
-
-
-
+                        AdvertisementName = jobAdvertisement.AdvertisementName,
+                        CategoryJobAdvertisements = jobAdvertisement.CategoryJobAdvertisements,
+                        SkillJobAdvertisements = jobAdvertisement.SkillJobAdvertisements,
+                        Explanation = jobAdvertisement.Explanation,
+                        EmployerId = jobAdvertisement.EmployerId,
+                        Employer = jobAdvertisement.Employer
+                    }
+                );
+            }
         }
     }
 }

@@ -13,8 +13,9 @@ namespace Freelancer.Context
         {
 
         }
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<UserSkill> UserSkills { get; set; }
+        public virtual DbSet<Worker> Workers { get; set; }
+        public virtual DbSet<Employer> Employers { get; set; }
+        public virtual DbSet<WorkerSkill> WorkerSkills { get; set; }
         public virtual DbSet<SkillJobAdvertisement> SkillJobAdvertisements { get; set; }
         public virtual DbSet<Skill> Skills { get; set; }
         public virtual DbSet<JobAdvertisement> JobAdvertisements { get; set; }

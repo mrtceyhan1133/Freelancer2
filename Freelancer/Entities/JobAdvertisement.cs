@@ -12,8 +12,8 @@ namespace Freelancer.Entities
         public string Explanation { get; set; }
         public virtual List<CategoryJobAdvertisement> CategoryJobAdvertisements { get; set; }
         public virtual List<SkillJobAdvertisement> SkillJobAdvertisements { get; set; }
-        public int UserId { get; set; }
-        public virtual User User { get; set; }
+        public int EmployerId { get; set; }
+        public virtual Employer Employer { get; set; }
 
 
 

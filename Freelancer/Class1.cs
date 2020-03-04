@@ -1,37 +1,27 @@
-namespace Freelancer.Migrations
+ï»¿using Freelancer.Context;
+using Freelancer.Entities;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity.Migrations;
+using System.Linq;
+using System.Web;
+
+namespace Freelancer
 {
-    using Freelancer.Controllers;
-    using Freelancer.Entities;
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<Freelancer.Context.FreelanceDbContext>
+    public class Class1
     {
-        public Configuration()
+        public FreelanceDbContext context = new FreelanceDbContext(); 
+        public void X()
         {
-            AutomaticMigrationsEnabled = false;
-        }
-
-        protected override void Seed(Freelancer.Context.FreelanceDbContext context)
-        {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
-            //Class1 lass1 = new Class1();
-            //lass1.X();
             List<Worker> workerList = new List<Worker>()
             {
                 new Worker()
                 {
                     Id=1,
-                    Name="Yaðmur",
+                    Name="YaÄŸmur",
                     Surname="Atici",
                     PhoneNumber="12345",
-                    UserName="Yaðmuþ",
+                    UserName="YaÄŸmuÅŸ",
                     Rating = 5,
                     WorkerSkills=new List<WorkerSkill>()
                 },
@@ -41,7 +31,7 @@ namespace Freelancer.Migrations
                     Name="Murat",
                     Surname="Ceyhan",
                     PhoneNumber="123456",
-                    UserName="Murçik",
+                    UserName="MurÃ§ik",
                     Rating = 5,
                     WorkerSkills=new List<WorkerSkill>()
                 },
@@ -49,9 +39,9 @@ namespace Freelancer.Migrations
                 {
                     Id=3,
                     Name="Alev",
-                    Surname="Yýlmaz",
+                    Surname="YÄ±lmaz",
                     PhoneNumber="112525456",
-                    UserName="Ateþ",
+                    UserName="AteÅŸ",
                     Rating = 3.8,
                     WorkerSkills=new List<WorkerSkill>(),
                 },
@@ -61,9 +51,9 @@ namespace Freelancer.Migrations
                 new Employer()
                 {
                     Id=1,
-                    Name="Çaðýl",
+                    Name="Ã‡aÄŸÄ±l",
                     PhoneNumber="1234123",
-                    Surname="Alsaç",
+                    Surname="AlsaÃ§",
                     UserName="Angeleo",
                     JobAdvertisements = new List<JobAdvertisement>()
                 },
@@ -81,7 +71,7 @@ namespace Freelancer.Migrations
                     Id=3,
                     Name="Ceku",
                     PhoneNumber="443232",
-                    Surname="Balým",
+                    Surname="BalÄ±m",
                     UserName="Cb123",
                     JobAdvertisements = new List<JobAdvertisement>()
                 }
@@ -395,20 +385,20 @@ namespace Freelancer.Migrations
                     }
                 );
             }
-            foreach (Employer employer in employerList)
-            {
-                context.Employers.AddOrUpdate(e => e.Name,
-                   new Employer()
-                   {
-                       Id = employer.Id,
-                       Name = employer.Name,
-                       PhoneNumber = employer.PhoneNumber,
-                       Surname = employer.Surname,
-                       UserName = employer.UserName,
-                       JobAdvertisements = employer.JobAdvertisements
-                   }
-                   );
-            }
+            //foreach (Employer employer in employerList)
+            //{
+            //    context.Employers.AddOrUpdate(e => e.Name,
+            //       new Employer()
+            //       {
+            //           Id = employer.Id,
+            //           Name = employer.Name,
+            //           PhoneNumber = employer.PhoneNumber,
+            //           Surname = employer.Surname,
+            //           UserName = employer.UserName,
+            //           JobAdvertisements = employer.JobAdvertisements
+            //       }
+            //       );
+            //}
             foreach (Skill skill in skillList)
             {
                 context.Skills.AddOrUpdate(m => m.Name,
@@ -430,26 +420,21 @@ namespace Freelancer.Migrations
                     }
                 );
             }
-            //foreach (JobAdvertisement jobAdvertisement in jobAdvertisementList)
-            //{
-            //    context.JobAdvertisements.AddOrUpdate(m => m.AdvertisementName,
-            //        new JobAdvertisement
-            //        {
+            foreach (JobAdvertisement jobAdvertisement in jobAdvertisementList)
+            {
+                context.JobAdvertisements.AddOrUpdate(m => m.AdvertisementName,
+                    new JobAdvertisement
+                    {
 
-            //            AdvertisementName = jobAdvertisement.AdvertisementName,
-            //            CategoryJobAdvertisements = jobAdvertisement.CategoryJobAdvertisements,
-            //            SkillJobAdvertisements = jobAdvertisement.SkillJobAdvertisements,
-            //            Explanation = jobAdvertisement.Explanation,
-            //            EmployerId = jobAdvertisement.EmployerId,
-            //            Employer = jobAdvertisement.Employer
-            //        }
-            //    );
-            //}
-
-
-
-
-
+                        AdvertisementName = jobAdvertisement.AdvertisementName,
+                        CategoryJobAdvertisements = jobAdvertisement.CategoryJobAdvertisements,
+                        SkillJobAdvertisements = jobAdvertisement.SkillJobAdvertisements,
+                        Explanation = jobAdvertisement.Explanation,
+                        EmployerId = jobAdvertisement.EmployerId,
+                        Employer = jobAdvertisement.Employer
+                    }
+                );
+            }
         }
     }
 }

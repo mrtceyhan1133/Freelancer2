@@ -21,7 +21,7 @@ namespace Freelancer.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("FreelanceDbContext", throwIfV1Schema: false)
         {
         }
 
