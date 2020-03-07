@@ -13,125 +13,114 @@ using Freelancer.Services.Base;
 
 namespace Freelancer.Controllers
 {
-    public class WorkersController : Controller
+    public class CategoriesController : Controller
     {
         DbContext db = new FreelanceDbContext();
-        ServiceBase<Worker> workerService;
-        public WorkersController()
+        ServiceBase<Category> categoryService;
+            public CategoriesController()
         {
-
-            workerService = new Service<Worker>(db);
+            categoryService = new Service<Category>(db);
         }
 
-
-        // GET: Workers
+        // GET: Categories
         public ActionResult Index()
         {
-            
-            
-            return View(workerService.GetEntities());
+            return View(categoryService.GetEntities());
         }
 
-        // GET: Workers/Details/5
+        // GET: Categories/Details/5
         public ActionResult Details(int? id)
         {
             if (!id.HasValue)
             {
-                
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Worker worker = workerService.GetEntity(id.Value);
-            if (worker == null)
+            Category category = categoryService.GetEntity(id.Value);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(worker);
+            return View(category);
         }
 
-        // GET: Workers/Create
+        // GET: Categories/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Workers/Create
+        // POST: Categories/Create
         // Aşırı gönderim saldırılarından korunmak için, lütfen bağlamak istediğiniz belirli özellikleri etkinleştirin, 
         // daha fazla bilgi için https://go.microsoft.com/fwlink/?LinkId=317598 sayfasına bakın.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Surname,PhoneNumber,UserName")] Worker worker)
+        public ActionResult Create([Bind(Include = "Id,Name")] Category category)
         {
             if (ModelState.IsValid)
             {
-               worker.Email = User.Identity.Name;
-               workerService.AddEntity(worker);
-               workerService.SaveChanges();
-               return RedirectToAction("Index");
+               categoryService.AddEntity(category);
+                return RedirectToAction("Index");
             }
 
-            return View(worker);
+            return View(category);
         }
 
-        // GET: Workers/Edit/5
+        // GET: Categories/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Worker worker = workerService.GetEntity(id.Value);
-            
-            return View(worker);
+            Category category = categoryService.GetEntity(id.Value);
+            if (category == null)
+            {
+                return HttpNotFound();
+            }
+            return View(category);
         }
 
-        // POST: Workers/Edit/5
+        // POST: Categories/Edit/5
         // Aşırı gönderim saldırılarından korunmak için, lütfen bağlamak istediğiniz belirli özellikleri etkinleştirin, 
         // daha fazla bilgi için https://go.microsoft.com/fwlink/?LinkId=317598 sayfasına bakın.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Surname,PhoneNumber,UserName,Rating")] Worker worker)
+        public ActionResult Edit([Bind(Include = "Id,Name")] Category category)
         {
             if (ModelState.IsValid)
             {
-                workerService.UpdateEntity(worker);
-                
+                categoryService.UpdateEntity(category);
                 return RedirectToAction("Index");
             }
-            return View(worker);
+            return View(category);
         }
 
-        // GET: Workers/Delete/5
+        // GET: Categories/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Worker worker =workerService.GetEntity(id.Value);
-            if (worker == null)
+            Category category = categoryService.GetEntity(id.Value);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(worker);
+            return View(category);
         }
 
-        // POST: Workers/Delete/5
+        // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Worker worker = workerService.GetEntity(id);
-            workerService.DeleteEntity(worker);
+            Category category = categoryService.GetEntity(id);
+            categoryService.DeleteEntity(category);
+            categoryService.SaveChanges();
             return RedirectToAction("Index");
-        }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+
         }
     }
 }

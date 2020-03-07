@@ -26,5 +26,9 @@ namespace Freelancer.Controllers
 
             return View();
         }
+        public ActionResult WorkerOrEmployer()
+        {
+            return View();
+        }
     }
 }

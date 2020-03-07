@@ -12,7 +12,8 @@ namespace Freelancer.Entities
         public string Surname { get; set; }
         public string PhoneNumber { get; set; }
         public string UserName { get; set; }
-        public double Rating { get; set; }
+        public double? Rating { get; set; } = null;
+        public string Email { get; set; }
         public virtual List<WorkerSkill> WorkerSkills { get; set; }
         
 

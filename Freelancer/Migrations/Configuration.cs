@@ -21,8 +21,7 @@ namespace Freelancer.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
-            //Class1 lass1 = new Class1();
-            //lass1.X();
+          
             List<Worker> workerList = new List<Worker>()
             {
                 new Worker()
