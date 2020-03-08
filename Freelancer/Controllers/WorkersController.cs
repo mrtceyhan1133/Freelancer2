@@ -27,7 +27,8 @@ namespace Freelancer.Controllers
         // GET: Workers
         public ActionResult Index()
         {
-            
+             
+            //  int a =  workerService.GetEntityQuery(e => e.Email == User.Identity.Name).Select(e=>e.Id).FirstOrDefault();
             
             return View(workerService.GetEntities());
         }
@@ -35,6 +36,7 @@ namespace Freelancer.Controllers
         // GET: Workers/Details/5
         public ActionResult Details(int? id)
         {
+            
             if (!id.HasValue)
             {
                 

@@ -23,13 +23,6 @@ namespace Freelancer.Services.Base
             unitOfWork = new UnitOfWork(db);
         }
 
-        public virtual int GetIdByEmail(string Email)
-        {
-           
-
-            return 1;
-        }
-
         // Repository üzerinden herhangi bir filtre olmadan tüm entity'leri liste olarak döner
         public virtual List<TEntity> GetEntities()
         {

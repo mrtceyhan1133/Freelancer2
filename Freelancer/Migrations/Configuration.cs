@@ -32,7 +32,8 @@ namespace Freelancer.Migrations
                     PhoneNumber="12345",
                     UserName="Yaðmuþ",
                     Rating = 5,
-                    WorkerSkills=new List<WorkerSkill>()
+                    WorkerSkills=new List<WorkerSkill>(),
+                     Email="yagmur@atici.com"
                 },
                 new Worker()
                 {
@@ -42,7 +43,8 @@ namespace Freelancer.Migrations
                     PhoneNumber="123456",
                     UserName="Murçik",
                     Rating = 5,
-                    WorkerSkills=new List<WorkerSkill>()
+                    WorkerSkills=new List<WorkerSkill>(),
+                    Email="murcik@123.com"
                 },
                 new Worker()
                 {
@@ -53,6 +55,7 @@ namespace Freelancer.Migrations
                     UserName="Ateþ",
                     Rating = 3.8,
                     WorkerSkills=new List<WorkerSkill>(),
+                    Email="alev@yilmaz.com"
                 },
             };
             List<Employer> employerList = new List<Employer>()
@@ -64,7 +67,9 @@ namespace Freelancer.Migrations
                     PhoneNumber="1234123",
                     Surname="Alsaç",
                     UserName="Angeleo",
-                    JobAdvertisements = new List<JobAdvertisement>()
+                    JobAdvertisements = new List<JobAdvertisement>(),
+                    Email="cagil@alsac.com"
+                    
                 },
                 new Employer()
                 {
@@ -73,7 +78,8 @@ namespace Freelancer.Migrations
                     PhoneNumber="123232234123",
                     Surname="Hoca",
                     UserName="EHoca",
-                    JobAdvertisements = new List<JobAdvertisement>()
+                    JobAdvertisements = new List<JobAdvertisement>(),
+                    Email="erkan@hoca.com"
                 },
                 new Employer()
                 {
@@ -82,7 +88,8 @@ namespace Freelancer.Migrations
                     PhoneNumber="443232",
                     Surname="Balým",
                     UserName="Cb123",
-                    JobAdvertisements = new List<JobAdvertisement>()
+                    JobAdvertisements = new List<JobAdvertisement>(),
+                    Email="ceku@balim.com"
                 }
 
             };
@@ -390,7 +397,9 @@ namespace Freelancer.Migrations
                         Rating = worker.Rating,
                         Surname = worker.Surname,
                         UserName = worker.UserName,
-                        WorkerSkills = worker.WorkerSkills
+                        WorkerSkills = worker.WorkerSkills,
+                        Email=worker.Email
+
                     }
                 );
             }
@@ -404,6 +413,7 @@ namespace Freelancer.Migrations
                        PhoneNumber = employer.PhoneNumber,
                        Surname = employer.Surname,
                        UserName = employer.UserName,
+                       Email=employer.Email,
                        JobAdvertisements = employer.JobAdvertisements
                    }
                    );

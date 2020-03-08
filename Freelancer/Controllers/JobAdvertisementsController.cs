@@ -1,5 +1,6 @@
 ﻿using Freelancer.Context;
 using Freelancer.Entities;
+using Freelancer.Models.ViewModels;
 using Freelancer.Services;
 using Freelancer.Services.Base;
 using System.Data.Entity;
@@ -21,10 +22,12 @@ namespace Freelancer.Controllers
         // GET: JobAdvertisements
         public ActionResult Index()
         {
+            //var jobAdvertisements2 = jobAdvertisementService.GetEntityQuery().Include(e => e.EmployerId).ToList();
             var jobAdvertisements = jobAdvertisementService.GetEntities().Where(e => e.Employer != null).ToList();
 
             return View(jobAdvertisements);
         }
+        
 
         // GET: JobAdvertisements/Details/5
         public ActionResult Details(int? id)
@@ -121,5 +124,16 @@ namespace Freelancer.Controllers
             jobAdvertisementService.DeleteEntity(jobAdvertisement);
             return RedirectToAction("Index");
         }  
+        public ActionResult List(JobAdvertisementViewModel jobAdvertisementViewModel)
+        {
+            if (jobAdvertisementViewModel == null)
+                jobAdvertisementViewModel = new JobAdvertisementViewModel();
+            var query = jobAdvertisementService.GetEntityQuery();
+            if (jobAdvertisementViewModel.AdvertisementName != null)
+                query = query.Where(e => e.AdvertisementName.ToLower() == jobAdvertisementViewModel.AdvertisementName.ToLower());
+
+            jobAdvertisementViewModel.JobAdvertisements = query.ToList();
+            return View(jobAdvertisementViewModel);
+        }
     }
 }

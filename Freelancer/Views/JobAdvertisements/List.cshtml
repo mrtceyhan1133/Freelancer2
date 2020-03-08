@@ -1,0 +1,61 @@
+﻿@model Freelancer.Models.ViewModels.JobAdvertisementViewModel
+@{
+    ViewBag.Title = "List Advertisement";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("List", "JobAdvertisements", "", FormMethod.Get))
+{
+<div class="row">
+    @Html.Label("lbName", "Advertisement Name")
+    @Html.EditorFor(model=>model.AdvertisementName)
+    @Html.Label("lbExplanation","Explanation")
+    @Html.EditorFor(model=>model.Explanation)
+    @Html.LabelFor(model=>model.EmployerName)
+    @Html.EditorFor(model=>model.EmployerName)
+    @Html.LabelFor(model=>model.EmployerUserName)
+    @Html.EditorFor(model=>model.EmployerUserName)
+    <button type="submit" value="submit">Search</button>
+
+</div>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Advertisement Name")
+        </th>
+        <th>
+            @Html.Label("Explanation")
+        </th>
+        <th>
+            @Html.Label("Employer Name")
+        </th>
+        <th>
+            @Html.Label("Employer User Name")
+        </th>
+    </tr>
+
+    @foreach (var item in Model.JobAdvertisements)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdvertisementName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Explanation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employer.Name)
+            </td>
+            <td>
+               @* @Html.DisplayFor(Model=>item.Employer)*@
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+
+
