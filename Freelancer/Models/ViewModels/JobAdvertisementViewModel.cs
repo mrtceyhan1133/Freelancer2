@@ -13,5 +13,6 @@ namespace Freelancer.Models.ViewModels
         public string Explanation { get; set; }
         public string EmployerName { get; set; }
         public string EmployerUserName { get; set; }
+        public string Category { get; set; }
     }
 }

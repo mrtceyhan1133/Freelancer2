@@ -130,8 +130,16 @@ namespace Freelancer.Controllers
                 jobAdvertisementViewModel = new JobAdvertisementViewModel();
             var query = jobAdvertisementService.GetEntityQuery();
             if (jobAdvertisementViewModel.AdvertisementName != null)
-                query = query.Where(e => e.AdvertisementName.ToLower() == jobAdvertisementViewModel.AdvertisementName.ToLower());
-
+                query = query.Where(e => e.AdvertisementName.ToLower().Contains(jobAdvertisementViewModel.AdvertisementName.ToLower()));
+            if (jobAdvertisementViewModel.EmployerName != null)
+                query = query.Where(e => e.Employer.Name.ToLower().Contains(jobAdvertisementViewModel.EmployerName.ToLower()));
+            if (jobAdvertisementViewModel.EmployerUserName != null)
+                query = query.Where(e => e.Employer.UserName.ToLower().Contains(jobAdvertisementViewModel.EmployerUserName.ToLower()));
+            if (jobAdvertisementViewModel.Explanation != null)
+                query = query.Where(e => e.Explanation.ToLower().Contains(jobAdvertisementViewModel.Explanation.ToLower()));
+            //if (jobAdvertisementViewModel.Category != null)
+            //    query = query..FindAll(e => e.CategoryJobAdvertisements.FindAll(e=>e.Category.Name==jobAdvertisementViewModel.Category));
+            
             jobAdvertisementViewModel.JobAdvertisements = query.ToList();
             return View(jobAdvertisementViewModel);
         }
